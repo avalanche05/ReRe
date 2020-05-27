@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorBackground"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/idTextView"
+        android:textColor="@color/colorText"
+        android:textSize="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID:" />
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:textColor="@color/colorText"
+        android:textSize="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="00:00" />
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:textColor="@color/colorText"
+        android:textSize="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="01.01.0101" />
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:textColor="@color/colorText"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ресторан" />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:textColor="@color/colorText"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="адрес" />
+</LinearLayout>
