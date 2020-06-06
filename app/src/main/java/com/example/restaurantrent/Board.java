@@ -1,23 +1,17 @@
 package com.example.restaurantrent;
 
-public class Table {
+import java.io.Serializable;
+
+public class Board implements Serializable {
     private long id;
     private long idRestaurant;
     private float x;
     private float y;
 
-    public Table(long id, long idRestaurant, float x, float y) {
-        this.id = id;
-        this.idRestaurant = idRestaurant;
-        this.x = x;
-        this.y = y;
+    public Board() {
     }
 
-    public Table(long id) {
-        this.id = id;
-    }
-
-    public Table(long idRestaurant, float x, float y) {
+    public Board(long idRestaurant, float x, float y) {
         this.idRestaurant = idRestaurant;
         this.x = x;
         this.y = y;

@@ -7,22 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.restaurantrent.R;
-import com.example.restaurantrent.activities.Main3Activity;
+import com.example.restaurantrent.Server;
 import com.example.restaurantrent.activities.MainActivity;
+import com.example.restaurantrent.activities.ViewRentTablesActivity;
 import com.example.restaurantrent.adapters.RentAdapter;
-import com.example.restaurantrent.adapters.RestaurantAdapter;
-import com.example.restaurantrent.constant.ActConst;
-import com.example.restaurantrent.services.HttpService;
 
+// фрагмент со списком заказов, сделанных пользователем
 public class NotificationsFragment extends Fragment {
 
     private NotificationsViewModel notificationsViewModel;
@@ -36,22 +34,21 @@ public class NotificationsFragment extends Fragment {
         notificationsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                Intent i = new Intent(getActivity(), HttpService.class);
-                i.putExtra("act", ActConst.GET_RENTS_ACT);
-                i.putExtra("idUser", MainActivity.idUser);
-                getActivity().startService(i);
-                RentAdapter rentAdapter = new RentAdapter(getContext(),MainActivity.rents);
+                // отправляем запрос списка заказов, сделанных пользователем, на сервер
+                Server.getUserRent(MainActivity.user.getId());
+
+                // создаём адаптер и присваеваем его rentsList
+                RentAdapter rentAdapter = new RentAdapter(getContext(), MainActivity.rents);
                 rentsList.setAdapter(rentAdapter);
+                // отслеживание нажатия на один из элементов restaurantList
                 rentsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         long restaurantId = MainActivity.rents.get(position).getIdRestaurant();
-                        Main3Activity.index = position;
-                        Intent i = new Intent(getActivity(), HttpService.class);
-                        i.putExtra("act", ActConst.GET_TABLES_ACT);
-                        i.putExtra("isRent",true);
-                        i.putExtra("idRestaurant",restaurantId);
-                        getActivity().startService(i);
+                        // заполняем поле index порядковым номером выбранного элемента rentsList
+                        ViewRentTablesActivity.index = position;
+                        // отправляем запрос списка столов для выбранного ресторана на сервер
+                        Server.tableGet(restaurantId, MainActivity.rents.get(position).getIdOwner(), getActivity(), new Intent(getActivity(), ViewRentTablesActivity.class));
                     }
                 });
             }

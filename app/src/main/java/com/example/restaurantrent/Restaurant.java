@@ -1,39 +1,43 @@
 package com.example.restaurantrent;
 
-import android.widget.Button;
-
-import java.util.ArrayList;
-
 public class Restaurant {
     private long id;
-    private long idOwners;
+
+    private long idOwner;
     private String name;
     private String address;
-
-    private ArrayList<Button> tables = new ArrayList<Button>();
 
     public Restaurant() {
     }
 
-    public Restaurant(String name, String address) {
+    public Restaurant(long idRestaurant, String name, String address) {
+        this.idOwner = idRestaurant;
         this.name = name;
         this.address = address;
     }
 
-    public Restaurant(long idOwners, String name, String address){
-        this.idOwners = idOwners;
-        this.name = name;
-        this.address = address;
-    }
-
-    public Restaurant(long id, long idOwners, String name, String address) {
+    public Restaurant(long id, long idOwner, String name, String address) {
         this.id = id;
-        this.idOwners = idOwners;
+        this.idOwner = idOwner;
         this.name = name;
         this.address = address;
     }
 
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getIdOwner() {
+        return idOwner;
+    }
+
+    public void setIdOwner(long idOwner) {
+        this.idOwner = idOwner;
+    }
 
     public String getName() {
         return name;
@@ -49,36 +53,5 @@ public class Restaurant {
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public ArrayList<Button> getTables() {
-        return tables;
-    }
-
-    public long getIdOwners() {
-        return idOwners;
-    }
-
-    public void setIdOwners(long idOwners) {
-        this.idOwners = idOwners;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setTables(ArrayList<Button> tables) {
-        this.tables = tables;
-    }
-
-    public void setTables(int i, Button table) {
-        this.tables.set(i,table);
-    }
-    public void addTables(Button table){
-        this.tables.add(table);
     }
 }

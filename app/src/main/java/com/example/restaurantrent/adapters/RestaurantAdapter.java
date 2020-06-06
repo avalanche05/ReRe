@@ -13,13 +13,14 @@ import com.example.restaurantrent.Restaurant;
 
 import java.util.ArrayList;
 
+// адаптер для отображения массива ресторанов на ListView
 public class RestaurantAdapter extends BaseAdapter {
 
     private LayoutInflater layoutInflater;
     private Context context;
     private ArrayList<Restaurant> restaurants;
 
-    public RestaurantAdapter(Context context, ArrayList<Restaurant> restaurants){
+    public RestaurantAdapter(Context context, ArrayList<Restaurant> restaurants) {
         this.context = context;
         this.restaurants = restaurants;
         this.layoutInflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,14 +44,16 @@ public class RestaurantAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        if(view == null)
-            view = layoutInflater.inflate(R.layout.restaurant,parent,false);
+        if (view == null)
+            view = layoutInflater.inflate(R.layout.restaurant, parent, false);
         Restaurant restaurant = getRestaurant(position);
         ((ImageView) view.findViewById(R.id.restaurantPicture)).setImageResource(R.drawable.logoicon);
         ((TextView) view.findViewById(R.id.name)).setText(restaurant.getName());
         ((TextView) view.findViewById(R.id.address)).setText(restaurant.getAddress());
+
         return view;
     }
+
     public Restaurant getRestaurant(int position) {
         return restaurants.get(position);
     }

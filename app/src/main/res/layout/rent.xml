@@ -4,6 +4,17 @@
     android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/messageButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="✉"
+        android:textSize="30dp"
+        android:textColor="@color/colorText" />
+
     <TextView
         android:id="@+id/idTextView"
         android:textColor="@color/colorText"

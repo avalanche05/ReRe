@@ -8,19 +8,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-
-import com.example.restaurantrent.constant.ActConst;
-import com.example.restaurantrent.activities.MainActivity;
 import com.example.restaurantrent.R;
+import com.example.restaurantrent.Server;
+import com.example.restaurantrent.activities.MainActivity;
+import com.example.restaurantrent.activities.ViewTablesActivity;
 import com.example.restaurantrent.adapters.RestaurantAdapter;
-import com.example.restaurantrent.services.HttpService;
 
+// фрагмент со списком всех ресторанов
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
@@ -34,24 +34,19 @@ public class DashboardFragment extends Fragment {
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-
-                Intent intent = new Intent(getActivity(), HttpService.class);
-                intent.putExtra("act", ActConst.GET_ALL_RESTAURANTS_ACT);
-                getActivity().startService(intent);
-
+                // отправляем запрос списка всех ресторанов на сервер
+                Server.getAllRestaurants();
+                // создаём адаптер и присваеваем его restaurantList
                 RestaurantAdapter restaurantAdapter = new RestaurantAdapter(getContext(), MainActivity.restaurants);
                 restaurantList.setAdapter(restaurantAdapter);
+                // отслеживание нажатия на один из элементов restaurantList
                 restaurantList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         long restaurantId = MainActivity.restaurants.get(position).getId();
-                        long ownerId = MainActivity.restaurants.get(position).getIdOwners();
-                        System.out.println("OWNER ID IN DASHBOARD FRAGMENT"+ownerId);
-                        Intent i = new Intent(getActivity(), HttpService.class);
-                        i.putExtra("act", ActConst.GET_TABLES_ACT);
-                        i.putExtra("idRestaurant",restaurantId);
-                        i.putExtra("idOwner",ownerId);
-                        getActivity().startService(i);
+                        long ownerId = MainActivity.restaurants.get(position).getIdOwner();
+                        // отправляем запрос списка столов для выбранного ресторана на сервер
+                        Server.tableGet(restaurantId, ownerId, getActivity(), new Intent(getActivity(), ViewTablesActivity.class));
                     }
                 });
             }

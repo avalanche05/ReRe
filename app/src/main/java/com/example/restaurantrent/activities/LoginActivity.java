@@ -1,83 +1,81 @@
 package com.example.restaurantrent.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.restaurantrent.Helper;
 import com.example.restaurantrent.R;
-import com.example.restaurantrent.constant.ActConst;
-import com.example.restaurantrent.services.HttpService;
+import com.example.restaurantrent.Server;
 
+import java.io.IOException;
+
+// activity для входа в приложение
 public class LoginActivity extends AppCompatActivity {
+
     private TextView signUp;
     private EditText loginEmail;
     private EditText loginPassword;
 
+    // поле для закрытия этого activity из другого класса
     public static Activity loginActivityThis;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         loginActivityThis = this;
+
         loginEmail = findViewById(R.id.emailEditText);
         loginPassword = findViewById(R.id.passwordEditText);
         signUp = findViewById(R.id.registrationTextView);
+
+        // проверяем, не входил ли пользователь ранее
+        SharedPreferences preferences = getSharedPreferences(Helper.APP_PREFERENCES, Context.MODE_PRIVATE);
+        if (preferences.contains(Helper.APP_PREFERENCES_EMAIL) && preferences.contains(Helper.APP_PREFERENCES_PASSWORD)) {
+            String email = preferences.getString(Helper.APP_PREFERENCES_EMAIL, "");
+            String password = preferences.getString(Helper.APP_PREFERENCES_PASSWORD, "");
+            // отправляем запрос входа на сервер
+            // loginUser принимает контекст, для отправки Toast и создания Intent, ProgressBar, который нужно показывать при загрузке и окна, которые нужно сделать невидимыми во время обращения к серверу
+            Server.loginUser(LoginActivity.this, email, password, (ProgressBar) findViewById(R.id.progressBar),
+                    signUp, loginEmail, loginPassword, findViewById(R.id.loginButton), findViewById(R.id.textView));
+        }
+        // отслеживаем нажатие на TextView для перехода к регистрации
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // переходим к activity регистрации
                 Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(i);
             }
         });
     }
-    public void toMain(View view){
+
+    // метод отслеживающий нажатие кнопки входа
+    public void toMain(View view) throws IOException {
+
         String email = loginEmail.getText().toString();
         String password = loginPassword.getText().toString();
-        if(email.isEmpty()||password.isEmpty()){
-            Toast.makeText(LoginActivity.this,"Ни одно поле не должно быть пустым",Toast.LENGTH_SHORT);
-        }
-        else if(isEmailCorrect(email)) {
-            if (password.length() >= 8){
-                Intent i = new Intent(LoginActivity.this, HttpService.class);
-                i.putExtra("act", ActConst.LOGIN_ACT);
-                i.putExtra("email",email);
-                i.putExtra("password",password);
 
-                signUp.setVisibility(TextView.INVISIBLE);
-                loginEmail.setVisibility(EditText.INVISIBLE);
-                loginPassword.setVisibility(EditText.INVISIBLE);
-                ((Button)findViewById(R.id.button)).setVisibility(Button.INVISIBLE);
-                ((TextView)findViewById(R.id.textView)).setVisibility(Button.INVISIBLE);
-                ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
-                progressBar.setVisibility(ProgressBar.VISIBLE);
-
-                startService(i);
-            }
-            else {
-                Toast.makeText(LoginActivity.this,"Пароль должен содержать 8 или более символов",Toast.LENGTH_SHORT).show();
-            }
-
+        // проверяем корректность электронной почты и пароля
+        if (Helper.isLoginDataCorrect(email, password, LoginActivity.this)) {
+            // отправляем запрос входа на сервер
+            // loginUser принимает контекст, для отправки Toast и создания Intent, ProgressBar, который нужно показывать при загрузке и окна, которые нужно сделать невидимыми во время загрузки
+            Server.loginUser(LoginActivity.this, email, password, (ProgressBar) findViewById(R.id.progressBar),
+                    signUp, loginEmail, loginPassword, findViewById(R.id.loginButton), findViewById(R.id.textView));
         }
-        else {
-            Toast.makeText(LoginActivity.this,"Формат электронной почты не корректен",Toast.LENGTH_SHORT).show();
-        }
+
     }
-    public static boolean isEmailCorrect(String email){
-        if(email.contains("@")){
-            email = email.split("@")[1];
-            if(email.contains(".")){
-                return true;
-            }
-        }
-        return false;
-    }
+
+
 }

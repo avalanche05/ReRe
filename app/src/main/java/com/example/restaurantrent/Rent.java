@@ -1,10 +1,9 @@
 package com.example.restaurantrent;
 
 
+import java.io.Serializable;
 
-
-
-public class Rent {
+public class Rent implements Serializable {
 
     private Long id;
 
@@ -18,7 +17,7 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(Long idUser, String idTables, String date, Long idOwner, String time) {
+    public Rent(Long idOwner, Long idUser, String idTables, String date, String time) {
         this.idUser = idUser;
         this.idTables = idTables;
         this.date = date;
@@ -26,15 +25,7 @@ public class Rent {
         this.time = time;
     }
 
-    public Rent(Long id, Long idUser, String idTables, String date, Long idOwner, String time, Long idRestaurant) {
-        this.id = id;
-        this.idUser = idUser;
-        this.idTables = idTables;
-        this.date = date;
-        this.idOwner = idOwner;
-        this.time = time;
-        this.idRestaurant = idRestaurant;
-    }
+
 
     public Long getId() {
         return id;
