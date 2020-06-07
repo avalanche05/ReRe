@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
         homeViewModel =
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView userInfo = root.findViewById(R.id.userInformationTextView);
+        final TextView emailText = root.findViewById(R.id.userInformationTextView);
         final Button outAccountButton = root.findViewById(R.id.outButton);
         final TextView confirmTextView = root.findViewById(R.id.confirmTextView);
         homeViewModel.getText().observe(this, new Observer<String>() {
@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
                         getActivity().finish();
                     }
                 });
-                userInfo.setText(MainActivity.user.getEmail());
+                emailText.setText("Email: "+MainActivity.user.getEmail());
             }
         });
         return root;

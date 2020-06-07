@@ -59,9 +59,9 @@ public class RentAdapter extends BaseAdapter {
                 break;
             }
         }
-        ((TextView) view.findViewById(R.id.idTextView)).setText("ID: " + rent.getId());
-        ((TextView) view.findViewById(R.id.timeTextView)).setText(rent.getTime());
-        ((TextView) view.findViewById(R.id.dateTextView)).setText(Helper.convertDateToString(rent.getDate()));
+        ((TextView) view.findViewById(R.id.idTextView)).setText("ID брони: " + rent.getId());
+        ((TextView) view.findViewById(R.id.timeTextView)).setText("Время: "+rent.getTime());
+        ((TextView) view.findViewById(R.id.dateTextView)).setText("Дата: "+Helper.convertDateToString(rent.getDate()));
         ((TextView) view.findViewById(R.id.titleTextView)).setText(restaurant.getName());
         ((TextView) view.findViewById(R.id.addressTextView)).setText(restaurant.getAddress());
         // отслеживаем нажатие на кнопку перехода к чату

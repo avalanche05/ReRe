@@ -4,21 +4,12 @@
     android:background="@color/colorBackground"
     android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/messageButton"
-        android:layout_width="63dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button"
-        android:focusable="false"
-        android:focusableInTouchMode="false"
-        android:text="✉"
-        android:textSize="30dp"
-        android:textColor="@color/colorText" />
-
     <TextView
         android:id="@+id/idTextView"
         android:textColor="@color/colorText"
-        android:textSize="40dp"
+        android:textSize="30dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="ID:" />
@@ -26,7 +17,8 @@
     <TextView
         android:id="@+id/timeTextView"
         android:textColor="@color/colorText"
-        android:textSize="60dp"
+        android:textSize="30dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="00:00" />
@@ -35,6 +27,7 @@
         android:id="@+id/dateTextView"
         android:textColor="@color/colorText"
         android:textSize="30dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="01.01.0101" />
@@ -43,6 +36,7 @@
         android:id="@+id/titleTextView"
         android:textColor="@color/colorText"
         android:textSize="20dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ресторан" />
@@ -51,7 +45,22 @@
         android:id="@+id/addressTextView"
         android:textColor="@color/colorText"
         android:textSize="20dp"
+        android:paddingLeft="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="адрес" />
+
+    <Button
+        android:id="@+id/messageButton"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:text="✉"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:layout_gravity="right"
+        android:textColor="@color/colorText"
+        android:textSize="30dp" />
 </LinearLayout>

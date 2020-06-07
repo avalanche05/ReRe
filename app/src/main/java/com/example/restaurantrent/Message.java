@@ -5,7 +5,7 @@ public class Message {
 
     private long id;
     private long idRent;
-    private boolean isOwner;
+    private boolean owner;
     private String textMessage;
 
     public Message() {
@@ -13,7 +13,7 @@ public class Message {
 
     public Message(long idRent, boolean isOwner, String textMessage) {
         this.idRent = idRent;
-        this.isOwner = isOwner;
+        this.owner = isOwner;
         this.textMessage = textMessage;
     }
 
@@ -34,11 +34,11 @@ public class Message {
     }
 
     public boolean isOwner() {
-        return isOwner;
+        return owner;
     }
 
     public void setOwner(boolean isOwner) {
-        this.isOwner = isOwner;
+        this.owner = isOwner;
     }
 
     public String getTextMessage() {

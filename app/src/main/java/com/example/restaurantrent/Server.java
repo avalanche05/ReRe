@@ -73,6 +73,7 @@ public class Server {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 // пробуем повторно подключиться к серверу
+                Toast.makeText(activity,"Повторное подключение к серверу",Toast.LENGTH_SHORT).show();
                 loginUser(activity, email, password, progressBar, views);
                 t.printStackTrace();
             }
@@ -121,6 +122,7 @@ public class Server {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 // пробуем повторно подключиться к серверу
+                Toast.makeText(activity,"Повторное подключение к серверу",Toast.LENGTH_SHORT).show();
                 signUpUser(activity, email, password, progressBar, views);
                 t.printStackTrace();
             }
@@ -318,7 +320,7 @@ public class Server {
 
     // инициализация Retrofit
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://restaurant-rent-server.herokuapp.com")
+            .baseUrl("https://restaurant-rent-server.herokuapp.com")
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build();

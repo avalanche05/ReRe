@@ -47,6 +47,7 @@ public class ViewRentTablesActivity extends AppCompatActivity {
             addContentView(button, new ViewGroup.LayoutParams(250, 250));
         }
     }
+
     // метод отслеживающий нажатие кнопки выхода
     public void outButton(View view) {
         // закрываем текущее activity

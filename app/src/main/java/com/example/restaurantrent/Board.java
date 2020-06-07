@@ -2,6 +2,9 @@ package com.example.restaurantrent;
 
 import java.io.Serializable;
 
+/*
+ класс, который хранит информацию о столах в ресторане
+ */
 public class Board implements Serializable {
     private long id;
     private long idRestaurant;

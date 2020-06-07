@@ -35,7 +35,7 @@ public class SignUpActivity extends AppCompatActivity {
         registrationButton = findViewById(R.id.registrationButton);
     }
 
-    // метод отслеживающий нажатие кнопки зарегистрироваться
+    // метод отслеживающий нажатие кнопки регистрации
     public void signUpButton(View view){
         String email = emailEditText.getText().toString();
         String password = passwordEditText.getText().toString();

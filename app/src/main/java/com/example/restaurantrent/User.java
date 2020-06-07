@@ -8,7 +8,7 @@ public class User implements Serializable {
 
     private String email;
     private String password;
-    private boolean isAuth;
+    private boolean auth;
 
 
 
@@ -45,10 +45,10 @@ public class User implements Serializable {
     }
 
     public boolean getAuth() {
-        return isAuth;
+        return auth;
     }
 
     public void setAuth(boolean auth) {
-        isAuth = auth;
+        this.auth = auth;
     }
 }

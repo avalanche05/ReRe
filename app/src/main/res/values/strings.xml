@@ -29,4 +29,5 @@
     <string name="out_account_text">Выйти из аккаунта</string>
     <string name="email_not_confirm">Почта не подтверждена</string>
     <string name="email_confirm">Почта подтверждена</string>
+    <string name="rent_title">Список бронирований</string>
 </resources>
